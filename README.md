@@ -1,8 +1,10 @@
 # RooomtechRAG
 
+Version: `0.2.0`
+
 RooomtechRAG is a Python/FastAPI RAG engine built around **bvectorDB** as the vector storage and retrieval layer.
 
-## v0.1
+## v0.2
 
 Current data path:
 
@@ -99,7 +101,7 @@ The adapter accepts search results returned as a list or under `hits`, `results`
 
 ## Embedding
 
-v0.1 uses `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` by default so Japanese and English documents can be embedded locally. The model is configurable with `EMBEDDING_MODEL`.
+v0.2 uses `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` by default so Japanese and English documents can be embedded locally. The model is configurable with `EMBEDDING_MODEL`.
 
 ## LLM
 
@@ -116,3 +118,13 @@ The default configuration targets a local Ollama-style chat endpoint and uses `q
 - document versioning
 - evaluation dataset support
 - RAG AutoPilot for automatic chunk-size, retrieval, top-k and reranker optimization
+
+## Commercial use and support
+
+For version `0.2.0` and later, ROOOMTECH-authored code is available for permitted noncommercial use under PolyForm Noncommercial License 1.0.0. Commercial or production use requires a separate paid commercial agreement with ROOOMTECH.
+
+ROOOMTECH offers paid maintenance, technical support, implementation, integration, upgrades, security support, SLA options, and custom development. A standard commercial software license agreement is available.
+
+Contact: `tasuku.yoshioka@rooomtech.com`
+
+PolyForm Noncommercial License 1.0.0: https://polyformproject.org/licenses/noncommercial/1.0.0
