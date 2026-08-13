@@ -1,29 +1,25 @@
-# RooomtechRAG
+# RooomRAG — Retrieval-Augmented Generation Engine
 
-Version: `0.2.0`
+Version: `0.3.0`
 
-RooomtechRAG is a Python/FastAPI RAG engine built around **bvectorDB** as the vector storage and retrieval layer.
+RooomRAG is a source-available Python/FastAPI RAG engine for document ingestion, retrieval, context construction, and cited LLM answers. It is designed to work with RooomVector through a dedicated adapter rather than depending on a Qdrant-compatible API.
 
-## v0.2
-
-Current data path:
+## Data path
 
 ```text
 Document
   -> parser
   -> chunker
   -> multilingual embedding
-  -> bvectorDB
+  -> RooomVector adapter
 
 Question
   -> multilingual embedding
-  -> bvectorDB search
+  -> hybrid retrieval
   -> context construction
   -> LLM
   -> answer + citations
 ```
-
-RooomtechRAG does **not** require bvectorDB to expose a Qdrant-compatible API. All bvectorDB-specific communication is isolated in `app/vectordb/bvector.py`.
 
 ## Supported input
 
@@ -46,85 +42,34 @@ OpenAPI / Swagger is available at `/docs` while the service is running.
 
 ## Setup
 
-Create a Python 3.11 environment, then install the package and start FastAPI.
-
-```text
+```bash
 pip install -e .
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
-Copy `config.example` to `.env` and adjust the bvectorDB and LLM endpoints.
+Copy `config.example` to `.env` and configure the vector database and LLM endpoints.
 
-## bvectorDB contract
+The internal adapter filename and some environment variables may retain earlier `bvectorDB` naming during the `0.3.x` compatibility transition. The product integration target is RooomVector.
 
-Default paths:
+## Roadmap
 
-```text
-POST /v1/collections/{collection}/upsert
-POST /v1/collections/{collection}/search
-DELETE /v1/collections/{collection}/documents/{document_id}
-```
-
-Default upsert body:
-
-```json
-{
-  "records": [
-    {
-      "id": "document-id:0",
-      "vector": [0.1, 0.2],
-      "payload": {
-        "document_id": "document-id",
-        "title": "manual",
-        "chunk_index": 0,
-        "text": "...",
-        "metadata": {}
-      }
-    }
-  ]
-}
-```
-
-Default search body:
-
-```json
-{
-  "vector": [0.1, 0.2],
-  "query": "search text",
-  "top_k": 8,
-  "mode": "hybrid",
-  "filter": {}
-}
-```
-
-The adapter accepts search results returned as a list or under `hits`, `results`, or `points`.
-
-## Embedding
-
-v0.2 uses `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2` by default so Japanese and English documents can be embedded locally. The model is configurable with `EMBEDDING_MODEL`.
-
-## LLM
-
-The default configuration targets a local Ollama-style chat endpoint and uses `qwen3:8b`. The URL and model are configurable with `LLM_URL` and `LLM_MODEL`. `app/llm.py` is intentionally isolated so additional providers can be added without changing the RAG pipeline.
-
-## Next milestones
-
-- exact bvectorDB wire-contract integration once its final API is fixed
-- query rewrite
-- dense + sparse result fusion
+- Query rewrite
+- Dense + sparse result fusion
 - MMR diversity control
-- reranking
-- ACL / document permissions
-- document versioning
-- evaluation dataset support
-- RAG AutoPilot for automatic chunk-size, retrieval, top-k and reranker optimization
+- Reranking
+- ACL/document permissions
+- Document versioning
+- Evaluation datasets
+- Automatic retrieval and chunking optimization
 
-## Commercial use and support
+## Licensing and enterprise support
 
-For version `0.2.0` and later, ROOOMTECH-authored code is available for permitted noncommercial use under PolyForm Noncommercial License 1.0.0. Commercial or production use requires a separate paid commercial agreement with ROOOMTECH.
+Starting with version `0.3.0`, ROOOMTECH-authored code is offered under either the PolyForm Noncommercial License 1.0.0 for uses permitted by that license, or a separate paid ROOOMTECH Commercial Software License for business/commercial-purpose uses and other uses outside the PolyForm permission.
 
-ROOOMTECH offers paid maintenance, technical support, implementation, integration, upgrades, security support, SLA options, and custom development. A standard commercial software license agreement is available.
+Commercial license agreements, maintenance, technical support, implementation, integration, upgrades, security support, SLA options, private builds, and custom development are available.
 
 Contact: `support@rooomtech.com`
 
 PolyForm Noncommercial License 1.0.0: https://polyformproject.org/licenses/noncommercial/1.0.0
+
+Earlier releases retain their published license terms. Third-party software retains its own licenses. See `LICENSE`.
