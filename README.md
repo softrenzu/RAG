@@ -125,6 +125,6 @@ For version `0.2.0` and later, ROOOMTECH-authored code is available for permitte
 
 ROOOMTECH offers paid maintenance, technical support, implementation, integration, upgrades, security support, SLA options, and custom development. A standard commercial software license agreement is available.
 
-Contact: `tasuku.yoshioka@rooomtech.com`
+Contact: `support@rooomtech.com`
 
 PolyForm Noncommercial License 1.0.0: https://polyformproject.org/licenses/noncommercial/1.0.0
