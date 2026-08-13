@@ -9,13 +9,11 @@ class Settings(BaseSettings):
     app_name: str = "RooomtechRAG"
     app_env: str = "development"
 
-    openai_api_key: str = ""
-    openai_base_url: str = "https://api.openai.com/v1"
-    embedding_model: str = "text-embedding-3-small"
-    chat_model: str = "gpt-4.1-mini"
+    embedding_model: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
+    llm_url: str = "http://localhost:11434/api/chat"
+    llm_model: str = "qwen3:8b"
 
     bvectordb_url: str = "http://localhost:8081"
-    bvectordb_api_key: str = ""
     bvectordb_upsert_path: str = "/v1/collections/{collection}/upsert"
     bvectordb_search_path: str = "/v1/collections/{collection}/search"
     bvectordb_delete_path: str = "/v1/collections/{collection}/documents/{document_id}"

@@ -1,0 +1,14 @@
+APP_NAME=RooomtechRAG
+APP_ENV=development
+EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+LLM_URL=http://localhost:11434/api/chat
+LLM_MODEL=qwen3:8b
+BVECTORDB_URL=http://localhost:8081
+BVECTORDB_UPSERT_PATH=/v1/collections/{collection}/upsert
+BVECTORDB_SEARCH_PATH=/v1/collections/{collection}/search
+BVECTORDB_DELETE_PATH=/v1/collections/{collection}/documents/{document_id}
+DEFAULT_COLLECTION=default
+DEFAULT_TOP_K=8
+CHUNK_SIZE=900
+CHUNK_OVERLAP=150
+REQUEST_TIMEOUT=60
