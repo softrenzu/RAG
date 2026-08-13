@@ -3,10 +3,13 @@ requires = ["setuptools>=70", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rooomtech-rag"
-version = "0.2.0"
-description = "RAG engine using bvectorDB"
+name = "rooom-rag"
+version = "0.3.0"
+description = "Retrieval-augmented generation engine with RooomVector integration"
+readme = "README.md"
 requires-python = ">=3.11"
+license = {file = "LICENSE"}
+authors = [{name = "ROOOMTECH"}]
 dependencies = [
   "fastapi>=0.116,<1",
   "uvicorn[standard]>=0.35,<1",
